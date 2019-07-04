@@ -7,15 +7,32 @@
 
 package assesment_typeconv;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.fail;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(value = Parameterized.class)
 public class ConvertorTest {
-	
-	@Test
-	public void crackUncrack() {
-		System.out.println(Convertor.crack(0));
-		System.out.println(Convertor.uncrack(Convertor.crack(0)));
-		fail("Not implemented yet");
-	}
+
+    @Parameter
+    public int id;
+
+    @Parameters(name = "{index}: ID - {0}")
+    public static Object[] data() {
+        return new Object[]{
+                -2147483648,
+                0,
+                2147483647,
+                1684522315,
+                123
+        };
+    }
+
+    @Test
+    public void crackUncrack() {
+        Assert.assertEquals(id, Convertor.uncrack(Convertor.crack(id)));
+    }
 }

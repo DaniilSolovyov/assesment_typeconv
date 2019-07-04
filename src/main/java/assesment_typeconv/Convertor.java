@@ -9,10 +9,13 @@
 package assesment_typeconv;
 
 public class Convertor {
-	public static Cracked crack(int value) {
-		return new Cracked((short)0, (short)0);		
-	}
-	public static int uncrack(Cracked cracked ) {
-		return 0;
-	}
+    public static Cracked crack(int value) {
+        short hi = (short) (value >> 16);
+        short low = (short) value;
+        return new Cracked(hi, low);
+    }
+
+    public static int uncrack(Cracked cracked) {
+        return (cracked.hi << 16) + (cracked.low & 0xFFFF);
+    }
 }
